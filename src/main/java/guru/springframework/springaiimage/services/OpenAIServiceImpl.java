@@ -2,9 +2,9 @@ package guru.springframework.springaiimage.services;
 
 import guru.springframework.springaiimage.model.Question;
 import lombok.RequiredArgsConstructor;
-import org.springframework.ai.image.ImageClient;
-import org.springframework.ai.image.ImageOptionsBuilder;
 import org.springframework.ai.image.ImagePrompt;
+import org.springframework.ai.openai.OpenAiImageClient;
+import org.springframework.ai.openai.OpenAiImageOptions;
 import org.springframework.stereotype.Service;
 
 import java.util.Base64;
@@ -16,15 +16,17 @@ import java.util.Base64;
 @Service
 public class OpenAIServiceImpl implements OpenAIService {
 
-    final ImageClient imageClient;
+    final OpenAiImageClient imageClient;
 
     @Override
     public byte[] getImage(Question question) {
 
-        var options = ImageOptionsBuilder.builder()
+        var options = OpenAiImageOptions.builder()
                 .withHeight(1024).withWidth(1024)
                 .withResponseFormat("b64_json")
                 .withModel("dall-e-3")
+                .withQuality("hd") //default standard
+                .withStyle("natural") //default vivid
                 .build();
 
         ImagePrompt imagePrompt = new ImagePrompt(question.question(), options);
