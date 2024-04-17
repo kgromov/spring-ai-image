@@ -22,11 +22,11 @@ public class OpenAIServiceImpl implements OpenAIService {
     public byte[] getImage(Question question) {
 
         var options = OpenAiImageOptions.builder()
-                .withHeight(1024).withWidth(1024)
+                .withHeight(1024).withWidth(1792)
                 .withResponseFormat("b64_json")
                 .withModel("dall-e-3")
                 .withQuality("hd") //default standard
-                .withStyle("natural") //default vivid
+                //.withStyle("natural") //default vivid
                 .build();
 
         ImagePrompt imagePrompt = new ImagePrompt(question.question(), options);
