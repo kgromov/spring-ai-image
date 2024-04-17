@@ -2,7 +2,12 @@ package guru.springframework.springaiimage.services;
 
 import guru.springframework.springaiimage.model.Question;
 import lombok.RequiredArgsConstructor;
+import org.springframework.ai.image.ImageClient;
+import org.springframework.ai.image.ImageOptionsBuilder;
+import org.springframework.ai.image.ImagePrompt;
 import org.springframework.stereotype.Service;
+
+import java.util.Base64;
 
 /**
  * Created by jt, Spring Framework Guru.
@@ -11,9 +16,37 @@ import org.springframework.stereotype.Service;
 @Service
 public class OpenAIServiceImpl implements OpenAIService {
 
+    final ImageClient imageClient;
+
     @Override
     public byte[] getImage(Question question) {
 
-       return null;
+        var options = ImageOptionsBuilder.builder()
+                .withHeight(1024).withWidth(1024)
+                .withResponseFormat("b64_json")
+                .build();
+
+        ImagePrompt imagePrompt = new ImagePrompt(question.question(), options);
+
+        var imageResponse = imageClient.call(imagePrompt);
+       return Base64.getDecoder().decode(imageResponse.getResult().getOutput().getB64Json());
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
