@@ -24,12 +24,14 @@ public class OpenAIServiceImpl implements OpenAIService {
         var options = ImageOptionsBuilder.builder()
                 .withHeight(1024).withWidth(1024)
                 .withResponseFormat("b64_json")
+                .withModel("dall-e-3")
                 .build();
 
         ImagePrompt imagePrompt = new ImagePrompt(question.question(), options);
 
         var imageResponse = imageClient.call(imagePrompt);
-       return Base64.getDecoder().decode(imageResponse.getResult().getOutput().getB64Json());
+
+        return Base64.getDecoder().decode(imageResponse.getResult().getOutput().getB64Json());
     }
 }
 
