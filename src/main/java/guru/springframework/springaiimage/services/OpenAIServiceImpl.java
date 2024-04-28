@@ -6,6 +6,7 @@ import org.springframework.ai.image.ImagePrompt;
 import org.springframework.ai.openai.OpenAiImageClient;
 import org.springframework.ai.openai.OpenAiImageOptions;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.Base64;
 
@@ -17,6 +18,11 @@ import java.util.Base64;
 public class OpenAIServiceImpl implements OpenAIService {
 
     final OpenAiImageClient imageClient;
+
+    @Override
+    public String getDescription(MultipartFile file) {
+        return "";
+    }
 
     @Override
     public byte[] getImage(Question question) {
