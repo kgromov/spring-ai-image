@@ -2,6 +2,7 @@ package guru.springframework.springaiimage.services;
 
 import guru.springframework.springaiimage.model.Question;
 import lombok.RequiredArgsConstructor;
+import org.springframework.ai.image.ImageOptionsBuilder;
 import org.springframework.ai.image.ImagePrompt;
 import org.springframework.ai.openai.OpenAiImageClient;
 import org.springframework.ai.openai.OpenAiImageOptions;
@@ -9,48 +10,32 @@ import org.springframework.stereotype.Service;
 
 import java.util.Base64;
 
-/**
- * Created by jt, Spring Framework Guru.
- */
+import static org.springframework.ai.openai.api.OpenAiImageApi.ImageModel.DALL_E_3;
+
 @RequiredArgsConstructor
 @Service
 public class OpenAIServiceImpl implements OpenAIService {
 
-    final OpenAiImageClient imageClient;
+    private final OpenAiImageClient imageClient;
 
     @Override
     public byte[] getImage(Question question) {
-
-        var options = OpenAiImageOptions.builder()
+        var extendedOptions = OpenAiImageOptions.builder()
                 .withHeight(1024).withWidth(1792)
                 .withResponseFormat("b64_json")
-                .withModel("dall-e-3")
+                .withModel(DALL_E_3.getValue())
                 .withQuality("hd") //default standard
-                //.withStyle("natural") //default vivid
+                .withStyle("natural") //default vivid
+                .build();
+
+        var options = ImageOptionsBuilder.builder()
+                .withHeight(1024).withWidth(1024)
+                .withModel(DALL_E_3.getValue())
+                .withResponseFormat("b64_json")
                 .build();
 
         ImagePrompt imagePrompt = new ImagePrompt(question.question(), options);
-
         var imageResponse = imageClient.call(imagePrompt);
-
         return Base64.getDecoder().decode(imageResponse.getResult().getOutput().getB64Json());
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
