@@ -21,7 +21,7 @@ public class ImageModelController {
     public String describe() {
         var imageResource = new ClassPathResource("/images/drugs.jpg");
         UserMessage userMessage = new UserMessage("""
-                The following is a screenshot of drugs. 
+                The following is a screenshot of drugs.
                 Can you do your best to provide a name and expiration date?
                 Answer in format: name - date(MM/yyyy)
                 """,
