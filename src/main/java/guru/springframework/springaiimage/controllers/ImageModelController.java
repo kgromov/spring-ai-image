@@ -32,6 +32,18 @@ public class ImageModelController {
         return response.getResult().getOutput().getContent();
     }
 
+    @GetMapping("/describe-ean")
+    public String describeEAN() {
+        var imageResource = new ClassPathResource("/images/ean-13.png");
+        UserMessage userMessage = new UserMessage("""
+                Here is the image of an EAN-13 code
+                Can you do your best to provide details about the product?
+                """,
+                List.of(new Media(MimeTypeUtils.IMAGE_PNG, imageResource)));
+        var response = chatModel.call(new Prompt(userMessage));
+        return response.getResult().getOutput().getContent();
+    }
+
     @GetMapping("/image-to-code")
     public String imageToCode(@RequestParam String image) {
         var imageResource = new ClassPathResource("/screens/%s.png".formatted(image));
