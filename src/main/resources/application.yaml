@@ -2,11 +2,6 @@ spring:
   application:
     name: spring-ai-image
   ai:
-    openai:
-      api-key: ${OPENAI_API_KEY}
+    ollama:
       chat:
-        options:
-          model: gpt-4o-mini
-      embedding:
-        options:
-          model: text-embedding-3-small
+        model: llama3.1

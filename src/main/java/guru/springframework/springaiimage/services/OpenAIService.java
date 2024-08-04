@@ -2,6 +2,7 @@ package guru.springframework.springaiimage.services;
 
 import guru.springframework.springaiimage.model.Question;
 import lombok.RequiredArgsConstructor;
+import org.springframework.ai.image.ImageModel;
 import org.springframework.ai.image.ImageOptionsBuilder;
 import org.springframework.ai.image.ImagePrompt;
 import org.springframework.ai.openai.OpenAiImageModel;
@@ -16,7 +17,7 @@ import static org.springframework.ai.openai.api.OpenAiImageApi.ImageModel.DALL_E
 @Service
 public class OpenAIService {
 
-    private final OpenAiImageModel imageModel;
+    private final ImageModel imageModel;
 
     public byte[] getImage(Question question) {
         var extendedOptions = OpenAiImageOptions.builder()
