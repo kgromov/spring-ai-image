@@ -4,4 +4,8 @@ spring:
   ai:
     ollama:
       chat:
-        model: llama3.1
+        model: llama3.2-vision
+    # disable autoconfiguration on multiple LLMs
+#    chat:
+#      client:
+#        enabled: false
