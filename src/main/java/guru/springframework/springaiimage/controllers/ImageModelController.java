@@ -50,7 +50,7 @@ public class ImageModelController {
         return ChatClient.builder(chatModel)
                 .build()
                 .prompt()
-                .system("The following is a screenshot of some code. Can you translate this from the image into text?")
+                .user("The following is a screenshot of some code. Can you translate this from the image into text?")
                 .user(um -> um.media(MimeTypeUtils.IMAGE_PNG, imageResource))
                 .call()
                 .content();
