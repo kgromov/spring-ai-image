@@ -2,11 +2,10 @@ spring:
   application:
     name: spring-ai-image
   ai:
-    openai:
-      api-key: ${OPENAI_API_KEY}
-      chat:
-        options:
-          model: gpt-4o-mini
-      embedding:
-        options:
-          model: text-embedding-3-small
+    azure:
+      openai:
+        api-key: ${GITHUB_TOKEN}
+        endpoint: "https://models.inference.ai.azure.com"
+        chat:
+          options:
+            model: gpt-4o

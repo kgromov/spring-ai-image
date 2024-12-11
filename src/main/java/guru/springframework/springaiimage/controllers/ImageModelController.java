@@ -2,10 +2,10 @@ package guru.springframework.springaiimage.controllers;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.ai.chat.client.ChatClient;
-import org.springframework.ai.chat.messages.Media;
 import org.springframework.ai.chat.messages.UserMessage;
 import org.springframework.ai.chat.model.ChatModel;
 import org.springframework.ai.chat.prompt.Prompt;
+import org.springframework.ai.model.Media;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.util.MimeTypeUtils;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -50,7 +50,7 @@ public class ImageModelController {
         return ChatClient.builder(chatModel)
                 .build()
                 .prompt()
-                .system("The following is a screenshot of some code. Can you translate this from the image into text?")
+                .user("The following is a screenshot of some code. Can you translate this from the image into text?")
                 .user(um -> um.media(MimeTypeUtils.IMAGE_PNG, imageResource))
                 .call()
                 .content();
