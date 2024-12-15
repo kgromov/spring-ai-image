@@ -9,3 +9,9 @@ spring:
         chat:
           options:
             model: gpt-4o
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
