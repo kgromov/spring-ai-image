@@ -10,3 +10,16 @@ spring:
       embedding:
         options:
           model: text-embedding-3-small
+
+management:
+  endpoint:
+    health:
+      show-details: always
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+
+logging:
+  level:
+    org.kgromov.observability: debug
